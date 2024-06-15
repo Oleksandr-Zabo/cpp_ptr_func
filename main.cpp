@@ -9,6 +9,26 @@ enum PointerType
 };
 
 template<typename T>
+void delete_ptr(T* ptr, PointerType pointer_type = PointerType::POINTER) {
+    if (ptr == nullptr)
+    {
+        cout << "ptr is now nullptr";
+    }
+    switch (pointer_type)
+    {
+    case PointerType::ARRAY:
+    {
+        delete[] ptr;
+    }break;
+    case PointerType::POINTER:
+    {
+        delete ptr;
+    }break;
+    }
+    ptr = nullptr;
+}
+
+template<typename T>
 T* init_array(int*& size)
 {
     if (size == nullptr)
@@ -69,25 +89,7 @@ int* b_in_a_array(T* arr_1, int* size_1, T* arr_2, int* size_2)
     }
 }
 
-template<typename T>
-void delete_ptr(T *ptr, PointerType pointer_type = PointerType::POINTER) {
-    if (ptr == nullptr)
-    {
-        cout << "ptr is now nullptr";
-    }
-    switch (pointer_type)
-    {
-    case PointerType::ARRAY:
-    {
-        delete[] ptr;
-    }break;
-    case PointerType::POINTER:
-    {
-        delete ptr;
-    }break;
-    }
-    ptr = nullptr;
-}
+
 
 int main()
 {
