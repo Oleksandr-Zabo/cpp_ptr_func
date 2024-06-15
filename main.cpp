@@ -2,6 +2,31 @@
 #include <ctime>
 using namespace std;
 
+enum PointerType
+{
+    ARRAY,
+    POINTER
+};
+
+template<typename T>
+void delete_ptr(T* ptr, PointerType pointer_type = PointerType::POINTER) {
+    if (ptr == nullptr)
+    {
+        cout << "ptr is now nullptr";
+    }
+    switch (pointer_type)
+    {
+    case PointerType::ARRAY:
+    {
+        delete[] ptr;
+    }break;
+    case PointerType::POINTER:
+    {
+        delete ptr;
+    }break;
+    }
+    ptr = nullptr;
+}
 
 template<typename T>
 T* init_array(int*& size)
@@ -61,9 +86,14 @@ void sum_product_array(T* arr, int* size, T*& count_p, T*& count_z, T*& count_n)
         count_p = new T{ *posit };
         count_z = new T{ *zero };
         count_n = new T{ *neg };
+        delete_ptr(posit);
+        delete_ptr(zero);
+        delete_ptr(neg);
        
     }
 }
+
+
 
 int main()
 {
@@ -92,6 +122,11 @@ int main()
     cout << "Count of zero: " << *count_z << endl;
     cout << "Count of negative: " << *count_n << endl;
 
+    delete_ptr(size);
+    delete_ptr(count_p);
+    delete_ptr(count_z);
+    delete_ptr(count_n);
+    delete_ptr(arr, PointerType::ARRAY);
     system("pause");
     return 0;
 }
