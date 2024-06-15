@@ -46,7 +46,7 @@ T* init_array(int*& size)
 template<typename T>
 void print_array(T* arr, int* size)
 {
-    if (arr == nullptr || size == nullptr)
+    if (arr == nullptr && size == nullptr)
     {
         cout << "Error value (nullptr) ";;
     }
@@ -62,7 +62,7 @@ void print_array(T* arr, int* size)
 template<typename T>
 void sum_product_array(T* arr, int* size, T*& count_p, T*& count_z, T*& count_n)
 {
-    if (arr == nullptr || size == nullptr)
+    if (arr == nullptr && size == nullptr)
     {
         cout << "Error value (nullptr)";;
     }
