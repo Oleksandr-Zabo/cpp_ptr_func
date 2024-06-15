@@ -47,7 +47,7 @@ T* init_array(int*& size)
 template<typename T>
 void print_array(T* arr, int* size)
 {
-    if (arr == nullptr || size == nullptr)
+    if (arr == nullptr && size == nullptr)
     {
         cout << "Error value ";;
     }
@@ -63,7 +63,7 @@ void print_array(T* arr, int* size)
 template<typename T>
 void array_insert(T*& arr, int*& size, T* arr_block, int* size_block)
 {
-    if (arr == nullptr || size == nullptr)
+    if (arr == nullptr && size == nullptr && arr_block == nullptr && size_block == nullptr)
     {
         cout << "Error value ";;
     }
