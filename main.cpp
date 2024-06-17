@@ -39,7 +39,7 @@ T* init_array(int*& size)
     T* arr = new T[*size];
     for (int i = 0; i < *size; i++)
     {
-        arr[i] = rand() % 10 - 5;
+        arr[i] = rand() % 20-10;//range of rand_num
     }
     return arr;
 }
@@ -61,32 +61,27 @@ void print_array(T* arr, int* size)
 }
 
 template<typename T>
-void array_insert(T*& arr, int*& size, T* arr_block, int* size_block, int* index)
+void array_remove(T*& arr, int*& size, int* size_block, int* index)
 {
     if (arr == nullptr && size == nullptr
-        && arr_block == nullptr
         && size_block == nullptr
         && index == nullptr)
     {
-        cout << "Error value ";;
+        cout << "Error value ";
     }
     else {
-        int* size_new = new  int{ (*size) + (*size_block) };
+        int* size_new = new  int{ (*size) - (*size_block) };
         T* arr_new = new T[*size_new];
-        for (int i = 0, j = 0, k = 0; i < *size_new; i++)
+
+        for (int i = 0, j = 0; i < *size_new; i++)
         {
             if (i < *index) {
 
-                arr_new[i] = arr[k];
-                k++;
-            }
-            else if (i >= *index + *size_block) {
-                arr_new[i] = arr[k];
-                k++;
+                arr_new[i] = arr[j];
+                j++;
             }
             else {
-                arr_new[i] = arr_block[j];
-                j++;
+                arr_new[i] = arr[i + *size_block];
             }
         }
 
@@ -118,26 +113,23 @@ int main()
     ptr_func(arr, size);
 
 
-    int* size_insert = new  int{ 1 };
+    int* size_remove_block = new  int{ 1 };
     do
     {
         cout << "Enter size of block: ";
-        cin >> *size_insert;
-    } while (*size_insert < 1);
+        cin >> *size_remove_block;
+    } while (*size_remove_block < 1 || *size_remove_block > *size);
 
     int* index = new  int{ 1 };
     do
     {
         cout << "Enter index of block: ";
         cin >> *index;
-    } while (*index < 0 || *index > *size);
-
-    int* arr_block = init_array<int>(size_insert);
-    cout << "Array block: " << endl;
-    ptr_func(arr_block, size_insert);
+    } while (*index < 0 || (*index + *size_remove_block) > *size);
 
 
-    array_insert<int>(arr, size, arr_block, size_insert, index);
+
+    array_remove<int>(arr, size, size_remove_block, index);
 
     cout << "Array 2: " << endl;
     ptr_func(arr, size);
@@ -145,9 +137,9 @@ int main()
 
 
     delete_ptr(size);
+    delete_ptr(index);
     delete_ptr(arr, PointerType::ARRAY);
-    delete_ptr(size_insert);
-    delete_ptr(arr_block, PointerType::ARRAY);
+    delete_ptr(size_remove_block);
 
 
     system("pause");
