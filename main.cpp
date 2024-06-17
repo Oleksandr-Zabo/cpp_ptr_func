@@ -145,6 +145,7 @@ int main()
 
 
     delete_ptr(size);
+    delete_ptr(index);
     delete_ptr(arr, PointerType::ARRAY);
     delete_ptr(size_insert);
     delete_ptr(arr_block, PointerType::ARRAY);
